@@ -1,0 +1,12 @@
+* text=auto eol=lf
+*.png binary
+*.wav binary
+*.ogg binary
+*.ydr binary
+*.ytyp binary
+*.ycd binary
+*.ypt binary
+*.awc binary
+*.rel binary
+*.glb binary
+*.blend binary
