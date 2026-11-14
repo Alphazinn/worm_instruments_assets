@@ -1,0 +1,3 @@
+# The sound build's downloads (Source/Sounds/build_sounds.py fetches them again when missing): hundreds of MB of
+# third-party recordings, never committed; only what the build writes from them ships.
+Source/Sounds/Cache/
