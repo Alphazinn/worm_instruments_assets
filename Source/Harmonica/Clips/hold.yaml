@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../../../../../../../../../G:/My Drive/Alpha Scripts/Alpha Scripts/Exclusive/FiveM-Anim-Forge/Source/schemas/gesture.schema.json
+# worm_instruments, Phase 3: the harmonica held in the right hand in front of the chest while it is not played,
+# breathing slowly. Played on the upper body (flag 49). The owner's test (2026-11-14): held at the mouth while silent,
+# the two flat hands read as praying -- out of the playing, it is simply held.
+clip: hold
+duration: 3.0
+loop: true
+poses:
+  # The right hand in front of the chest, the forearm raised (Anim-Forge's phone_hold arm, tuned in game there), its
+  # fingers closed round the harmonica. A finger curls about the ped's y axis: positive brings the right hand's
+  # fingers in towards its palm.
+  in_hand:
+    right_upper_arm: {x: 20, y: 17, z: 15}
+    right_forearm: {x: 131, y: 33, z: 79}
+    right_hand: {x: -20}
+    right_index_1: {y: 45}
+    right_index_2: {y: 50}
+    right_index_3: {y: 30}
+    right_middle_1: {y: 50}
+    right_middle_2: {y: 55}
+    right_middle_3: {y: 30}
+    right_ring_1: {y: 55}
+    right_ring_2: {y: 55}
+    right_ring_3: {y: 30}
+    right_pinky_1: {y: 60}
+    right_pinky_2: {y: 55}
+    right_pinky_3: {y: 30}
+    # The free left arm hangs as the game's own walk holds it (Anim-Forge's wave preset's relaxed arm, mirrored): left
+    # at freemode's rest it stood out wide from the body.
+    left_upper_arm: {x: 1, y: -17}
+    left_forearm: {x: 10, y: -5, z: -7}
+    left_hand: {x: 3, y: -7, z: -3}
+keyframes:
+  - {time: 0.0, pose: in_hand}
+  - {time: 1.5, bones: {spine_2: {x: 2}}, easing: ease_in_out}
+  - {time: 3.0, bones: {spine_2: {x: 0}}, easing: ease_in_out}

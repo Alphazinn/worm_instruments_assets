@@ -1,0 +1,9 @@
+worm_instr_harmonica
+0.028
+keep
+none
+PLASTIC
+60
+medium
+none
+n

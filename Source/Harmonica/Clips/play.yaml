@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../../../../../../../../../G:/My Drive/Alpha Scripts/Alpha Scripts/Exclusive/FiveM-Anim-Forge/Source/schemas/gesture.schema.json
+# worm_instruments, Phase 3: playing the harmonica. The harmonica itself rides on the head at the mouth (Client/
+# Instrument.lua), so it stays at the lips whatever the hands do; the hands come up round it, cupped, the fingers
+# closed over its ends, and the upper body sways a little from side to side with the head, as a player moves along the
+# holes. Played on the upper body (flag 49) while notes sound.
+clip: play
+duration: 1.6
+loop: true
+poses:
+  # Both hands before the mouth, palms towards each other round the harmonica, the fingers curled over it (about the
+  # ped's y axis: positive closes the right hand's fingers, negative the left's).
+  at_mouth:
+    right_upper_arm: {x: 55, y: 5, z: 30}
+    right_forearm: {x: 140, y: 30, z: 85}
+    right_hand: {x: -30, y: -20}
+    left_upper_arm: {x: 55, y: -5, z: -30}
+    left_forearm: {x: 140, y: -30, z: -85}
+    left_hand: {x: -30, y: 20}
+    right_index_1: {y: 40}
+    right_index_2: {y: 45}
+    right_middle_1: {y: 45}
+    right_middle_2: {y: 50}
+    right_ring_1: {y: 50}
+    right_ring_2: {y: 50}
+    right_pinky_1: {y: 55}
+    right_pinky_2: {y: 50}
+    left_index_1: {y: -40}
+    left_index_2: {y: -45}
+    left_middle_1: {y: -45}
+    left_middle_2: {y: -50}
+    left_ring_1: {y: -50}
+    left_ring_2: {y: -50}
+    left_pinky_1: {y: -55}
+    left_pinky_2: {y: -50}
+    neck: {x: 0}
+    head: {x: 3}
+keyframes:
+  - {time: 0.0, pose: at_mouth}
+  - {time: 0.0, bones: {spine_2: {z: 0}, spine_3: {z: 0}}}
+  - {time: 0.4, bones: {spine_2: {z: 3}, spine_3: {z: 3}, head: {x: 1, z: 4}}, easing: ease_in_out}
+  - {time: 0.8, bones: {spine_2: {z: 0}, spine_3: {z: 0}, head: {x: 3, z: 0}}, easing: ease_in_out}
+  - {time: 1.2, bones: {spine_2: {z: -3}, spine_3: {z: -3}, head: {x: 1, z: -4}}, easing: ease_in_out}
+  - {time: 1.6, bones: {spine_2: {z: 0}, spine_3: {z: 0}, head: {x: 3, z: 0}}, easing: ease_in_out}

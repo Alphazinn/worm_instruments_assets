@@ -13,9 +13,12 @@ in worm_instruments' `Assets/Sounds/` (played by the page), credited again in it
   Zero 1.0. The sustain-pedal notes, middle velocity layer.
 - **VSCO 2 CE, Solo Violin, Arco Vib (CC0)** — https://github.com/sgossner/VSCO-2-CE, Versilian Studios, Creative
   Commons Zero 1.0. Bowed with vibrato, forte.
+- **VCSL, Harmonica, Hohner Super 64 (CC0)** — https://github.com/sgossner/VCSL, Versilian Studios, Creative Commons
+  Zero 1.0. The chromatic harmonica's plain sustained notes (no vibrato).
 
 Each instrument is recorded or synthesised as the owner chose by ear in Phase 2: the piano and the violin recorded,
-the acoustic guitar synthesised (its recorded candidate was dropped for the noise inside its notes).
+the acoustic guitar synthesised (its recorded candidate was dropped for the noise inside its notes). From Phase 3 each
+instrument phase adds its own: the harmonica recorded.
 
 The downloads are cached in `Source/Sounds/Cache/` (not committed); `Report.json` beside the build keeps every sample's
 measured pitch, level and loop.
@@ -25,9 +28,14 @@ measured pitch, level and loop.
 Every prop is modelled for this script (Wormhole Studios); the game's own models are read only as a reference for size
 and proportion. Each prop's source is kept in `Source/<prop>/` when it is added (from Phase 3).
 
+- **worm_instr_harmonica** — the harmonica, built from nothing by `Source/Harmonica/make_harmonica.py` (Blender) and
+  converted with FiveM-Prop-Converter. No brand or marking.
+
 ## Animations
 
-Listed with their sources when they are added.
+Every clip is the script's own, written as an Anim-Forge gesture spec (no source animation file).
+
+- **worm_instr_harmonica** (`hold`, `play`) — the harmonica held at the mouth and played: `Source/Harmonica/Clips/`.
 
 ## Effects
 

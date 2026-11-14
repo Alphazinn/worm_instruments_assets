@@ -1,0 +1,43 @@
+{
+  "Name": "worm_instr_harmonica",
+  "Units": "metres",
+  "Axes": "X along the length (slide button at +X), Y depth (mouth side at -Y), Z up; origin at the body's centre",
+  "Size": [
+    0.19,
+    0.05,
+    0.028
+  ],
+  "MouthCentre": [
+    0.0,
+    -0.025,
+    0.0
+  ],
+  "SlideTip": [
+    0.107,
+    -0.016,
+    0.0
+  ],
+  "LeftGrip": [
+    -0.07,
+    0.01,
+    0.01343
+  ],
+  "RightGrip": [
+    0.07,
+    0.01,
+    0.01343
+  ],
+  "TriangleCount": 998,
+  "BoundsWithSlide": {
+    "Min": [
+      -0.095,
+      -0.025,
+      -0.014
+    ],
+    "Max": [
+      0.107,
+      0.025,
+      0.014
+    ]
+  }
+}

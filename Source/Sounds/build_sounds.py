@@ -7,7 +7,8 @@ Assets/Sounds/<Instrument>/, and writes the set into Assets/Sounds/Manifest.json
 and measures it again; Report.json beside this file keeps those measurements for the checks (checksound.py).
 
 One method per instrument, chosen by the owner's ear (Phase 2's test, 2026-11-14): the piano and the violin are
-recorded, the acoustic guitar synthesised. Tried and dropped there: a synthesised piano and violin (the recordings
+recorded, the acoustic guitar synthesised; each later instrument phase adds its own set (the harmonica, recorded, in
+Phase 3). Tried and dropped there: a synthesised piano and violin (the recordings
 won), and the University of Iowa guitar, whose chromatic runs carry each previous note's ring and the open strings'
 resonance inside every note -- after its hum, clicks and hiss were taken out the owner still heard it.
 
@@ -284,29 +285,45 @@ def PianoRecorded():
         yield Note, Trim(Decode(Path), min(10.0, max(3.0, 12.0 * 2 ** (-(Note - 21) / 30.0)))), None
 
 
+def Looped(Raw, Note):
+    """A sustained recording cut for the sampler: from its onset, with a crossfaded loop in its steady part, ending at
+    the loop's end. The steady part ends where the level first falls under half its median (the bow lifts, the breath
+    stops); the loop's start is tried at a few places after the note has settled and the best-matching seam is kept.
+    Yields what the set makers yield: (note, clip, (start, end, score)), or (note, None, the reason)."""
+    Clip = Raw[Onset(Raw):].copy()
+    Env = Envelope(Clip)
+    Steady = float(np.median(Env[int(0.3 * RATE / 512):]))
+    Fading = np.nonzero(Env[int(0.5 * RATE / 512):] < 0.5 * Steady)[0]
+    Release = (Fading[0] + int(0.5 * RATE / 512)) * 512 / RATE if len(Fading) else len(Clip) / RATE
+    Tries = [FindLoop(Clip, Earliest, Release - 0.1, min(0.7, max(0.3, Release - Earliest - 0.3)))
+             for Earliest in (0.45, 0.55, 0.65, 0.75)]
+    Tries = [Found for Found in Tries if Found is not None]
+    if not Tries:
+        return Note, None, "no room for a loop (release at %.2f s)" % Release
+    Start, End, Score = max(Tries, key=lambda Found: Found[2])
+    Crossfade(Clip, Start, End, 0.12)
+    Clip = Clip[:End].copy()
+    Clip[:int(0.001 * RATE)] *= np.linspace(0, 1, int(0.001 * RATE))
+    return Note, Clip, (Start, End, Score)
+
+
 def ViolinRecorded():
     """VSCO 2 CE's solo violin, arco with vibrato, forte: 15 notes; each gets a crossfaded loop in its sustain."""
     for Name in ("G3", "A3", "C4", "E4", "G4", "A4", "C5", "E5", "G5", "A5", "C6", "E6", "G6", "A6", "C7"):
         Path = Fetch(GitHubRaw("sgossner/VSCO-2-CE", "Strings/Solo Violin/Arco Vib/LLVln_ArcoVib_%s_f.wav" % Name),
                      "VSCO/Violin/%s.wav" % Name)
-        Raw = Decode(Path)
-        Note = Raw[Onset(Raw):].copy()
-        Env = Envelope(Note)
-        Steady = float(np.median(Env[int(0.3 * RATE / 512):]))
-        Fading = np.nonzero(Env[int(0.5 * RATE / 512):] < 0.5 * Steady)[0]
-        Release = (Fading[0] + int(0.5 * RATE / 512)) * 512 / RATE if len(Fading) else len(Note) / RATE
-        # The loop's start is tried at a few places after the bow has settled; the best-matching seam is kept.
-        Tries = [FindLoop(Note, Earliest, Release - 0.1, min(0.7, max(0.3, Release - Earliest - 0.3)))
-                 for Earliest in (0.45, 0.55, 0.65, 0.75)]
-        Tries = [Found for Found in Tries if Found is not None]
-        if not Tries:
-            yield Midi(Name), None, "no room for a loop (release at %.2f s)" % Release
-            continue
-        Start, End, Score = max(Tries, key=lambda Found: Found[2])
-        Crossfade(Note, Start, End, 0.12)
-        Clip = Note[:End].copy()
-        Clip[:int(0.001 * RATE)] *= np.linspace(0, 1, int(0.001 * RATE))
-        yield Midi(Name), Clip, (Start, End, Score)
+        yield Looped(Decode(Path), Midi(Name))
+
+
+def HarmonicaRecorded():
+    """VCSL's Hohner Super 64, a chromatic harmonica, plain breath (Normal, no vibrato): 13 notes, C, E and G of each
+    octave. VCSL names them an octave low: measured 2026-11-14, the file named C2 has strong odd partials of 130.8 Hz
+    (C3), the instrument's real bottom note, and none of 65.4 Hz -- so each note is its name plus 12."""
+    Folder = "Aerophones/Free Aerophones/Harmonica-Hohner-Super64/Sustains/Normal/"
+    for Name in ("C2", "E2", "G2", "C3", "E3", "G3", "C4", "E4", "G4", "C5", "E5", "G5", "C6"):
+        # The file names carry a space before the note ("Normal _C2"), as VCSL wrote them.
+        Path = Fetch(GitHubRaw("sgossner/VCSL", Folder + "Hohner-Super64_Normal _%s.wav" % Name), "VCSL/Super64/%s.wav" % Name)
+        yield Looped(Decode(Path), Midi(Name) + 12)
 
 
 def GuitarSynth():
@@ -320,6 +337,8 @@ SETS = {
     "Piano": ("Recorded", PianoRecorded, (21, 108), 0.35, "Sustain", "VCSL, Grand Piano, Steinway B (CC0)"),
     "Violin": ("Recorded", ViolinRecorded, (55, 100), 0.18, "Arco", "VSCO 2 CE, Solo Violin, Arco Vib (CC0)"),
     "AcousticGuitar": ("Synth", GuitarSynth, (40, 84), 0.25, "Pluck", "synthesised by build_sounds.py"),
+    # C3 to D7, the Super 64's own range; its top root (C7) reaches D7 two semitones up.
+    "Harmonica": ("Recorded", HarmonicaRecorded, (48, 98), 0.12, "Breath", "VCSL, Harmonica, Hohner Super 64 (CC0)"),
 }
 
 
