@@ -1,0 +1,24 @@
+# worm_instruments' note mark (sixteenth): a white note that fades in, rises fast and fades out. One puff a run (burst):
+# Client/Effects.lua runs it for a moment on every note, so the marks rise one after another. Fast enough that a mark
+# has risen its own height before the next is born 150 ms later (the owner's test, 2026-11-14: slower ones clumped
+# before the face).
+name: worm_instr_mark_3
+base: des_gas_station/ent_ray_paleto_gas_plume
+emitter:
+  rate: 1
+  lifetime: [1.0, 1.2]
+  burst: true
+  speed: [0.4, 0.5]
+  spread: 0.1
+particle:
+  color_over_life:
+    - [0, 1, 1, 1, 0]
+    - [0.1, 1, 1, 1, 0.95]
+    - [0.7, 1, 1, 1, 0.8]
+    - [1, 1, 1, 1, 0]
+  size_over_life: [[0, 0.18], [0.2, 0.25], [1, 0.25]]
+  gravity: -1.2
+  drag: 0.1
+  rotation: 0
+texture:
+  png: ../Textures/mark_sixteenth.png
