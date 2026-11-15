@@ -1,0 +1,9 @@
+worm_instr_tipcase
+0.12
+keep
+static
+WOOD_HOLLOW_MEDIUM
+100
+medium
+none
+n

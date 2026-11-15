@@ -1,0 +1,9 @@
+worm_instr_tiphat
+0.12812
+keep
+static
+CLOTH
+60
+medium
+none
+n

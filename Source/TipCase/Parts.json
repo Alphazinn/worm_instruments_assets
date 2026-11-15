@@ -1,0 +1,59 @@
+{
+  "Name": "worm_instr_tipcase",
+  "Units": "metres",
+  "Axes": "X along the length (wide end at -X), Y across (lid hinged at -Y, the busker's side, and lying back on the ground there with its lining up; handle and latches at +Y, the audience's side), Z up; origin on the ground under the tray's middle",
+  "Size": [
+    1.2932,
+    1.03271,
+    0.12
+  ],
+  "Bounds": {
+    "Min": [
+      -0.6252,
+      -0.75657,
+      0.0
+    ],
+    "Max": [
+      0.668,
+      0.27614,
+      0.12
+    ]
+  },
+  "TrayBounds": {
+    "Min": [
+      -0.6252,
+      -0.2551,
+      0.0
+    ],
+    "Max": [
+      0.6252,
+      0.2551,
+      0.115
+    ]
+  },
+  "LidBounds": {
+    "Min": [
+      -0.5597,
+      -0.75657,
+      0.0
+    ],
+    "Max": [
+      0.668,
+      -0.10827,
+      0.11472
+    ]
+  },
+  "LidAngle": 185.39,
+  "HingeLineTurn": 8.92,
+  "TipCentre": [
+    -0.3152,
+    0.0,
+    0.022
+  ],
+  "TipHalfSize": [
+    0.15,
+    0.13
+  ],
+  "OutlinePoints": 58,
+  "TriangleCount": 1952
+}

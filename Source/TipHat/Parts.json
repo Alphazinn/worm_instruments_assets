@@ -1,0 +1,41 @@
+{
+  "Name": "worm_instr_tiphat",
+  "Units": "metres",
+  "Axes": "X the longer way, Y the shorter way, Z up; origin on the ground under the middle; the opening is up",
+  "Size": [
+    0.333,
+    0.28215,
+    0.12812
+  ],
+  "OpeningCentre": [
+    0.0,
+    0.0,
+    0.113
+  ],
+  "OpeningHalfSize": [
+    0.104,
+    0.086
+  ],
+  "FloorCentre": [
+    0.0,
+    0.0,
+    0.0045
+  ],
+  "FloorHalfSize": [
+    0.071,
+    0.056
+  ],
+  "TriangleCount": 2046,
+  "BoundsWithBow": {
+    "Min": [
+      -0.1665,
+      -0.14108,
+      0.0
+    ],
+    "Max": [
+      0.1665,
+      0.14108,
+      0.12812
+    ]
+  }
+}
